@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación en Bicicleta</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #87ceeb; /* Color de cielo */
+        }
+
+        /* Pantalla de inicio */
+        #pantalla-inicio {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1c40f;
+            z-index: 10;
+            position: absolute;
+            width: 100%;
+        }
+
+        .icono-bici {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+
+        #btn-iniciar {
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.1s;
+        }
+
+        #btn-iniciar:active {
+            transform: scale(0.95);
+        }
+
+        /* Pantalla de animación (oculta al inicio) */
+        #pantalla-animacion {
+            display: none;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Calle en movimiento */
+        .calle {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background-color: #333;
+        }
+
+        .lineas-calle {
+            position: absolute;
+            top: 50%;
+            width: 200%; /* El doble de ancho para la animación */
+            height: 10px;
+            background: repeating-linear-gradient(90deg, transparent 0, transparent 50px, #fff 50px, #fff 100px);
+            animation: moverCalle 0.8s linear infinite;
+        }
+
+        @keyframes moverCalle {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        /* Contenedor del ciclista */
+        .ciclista {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: rebotar 0.4s alternate infinite;
+        }
+
+        @keyframes rebotar {
+            0% { bottom: 120px; }
+            100% { bottom: 130px; }
+        }
+
+        /* Personaje y bicicleta hechos con emojis */
+        .stickman-guitarra {
+            font-size: 60px;
+            display: block;
+            margin-bottom: -25px; /* Acerca el stickman a la bici */
+            margin-left: -20px;
+        }
+
+        .bicicleta {
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla 1: Botón de Inicio -->
+    <div id="pantalla-inicio">
+        <div class="icono-bici">🚲</div>
+        <button id="btn-iniciar">GO / INICIAR</button>
+    </div>
+
+    <!-- Pantalla 2: Animación -->
+    <div id="pantalla-animacion">
+        <!-- Elementos del fondo -->
+        <div class="calle">
+            <div class="lineas-calle"></div>
+        </div>
+        
+        <!-- Personaje animado -->
+        <div class="ciclista">
+            <span class="stickman-guitarra">🎸🕺</span>
+            <span class="bicicleta">🚲</span>
+        </div>
+    </div>
+
+    <!-- Audio (Debes tener un archivo llamado audio.mp3 en la misma carpeta) -->
+    <audio id="ssstik.io_1790734051120.mp3" loop></audio>
+
+    <script>
+        // Referencias a los elementos HTML
+        const btnIniciar = document.getElementById('btn-iniciar');
+        const pantallaInicio = document.getElementById('pantalla-inicio');
+        const pantallaAnimacion = document.getElementById('pantalla-animacion');
+        const audioFondo = document.getElementById('musica-fondo');
+
+        // Evento al hacer clic en el botón
+        btnIniciar.addEventListener('click', () => {
+            // Ocultar pantalla de inicio
+            pantallaInicio.style.display = 'none';
+            // Mostrar pantalla de animación
+            pantallaAnimacion.style.display = 'block';
+            // Reproducir el audio
+            audioFondo.play();
+        });
+    </script>
+</body>
+</html>
